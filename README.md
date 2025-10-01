@@ -1,4 +1,4 @@
-# ENERGY-REGULARIZED SEQUENTIAL MODEL EDITING ON HYPERSPHERES (SPHERE)
+# Energy-Regularized Sequential Model Editing on Hyperspheres
 
 
 ![alt text](resource/sphere_sparse.png)
