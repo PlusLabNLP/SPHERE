@@ -79,5 +79,19 @@ This command runs an evaluation script for the SPHERE algorithm using the Qwen2.
 
 The evaluation results will be stored at the `./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/rect_eval/`
 
+
+## Citation
+If you use this code and dataset, please cite our paper:
+```bibtex
+@article{liu2025energy,
+  title={Energy-Regularized Sequential Model Editing on Hyperspheres},
+  author={Liu, Qingyuan and Gu, Jia-Chen and Yao, Yunzhi and Wang, Hong and Peng, Nanyun},
+  journal={arXiv preprint arXiv:2510.xxxxx},
+  year={2025}
+}
+```
+
+
+
 ## Acknowledgment
 Our code is based on  [``MEMIT``](https://github.com/kmeng01/memit.git), [``EMMET``](https://github.com/scalable-model-editing/unified-model-editing.git) and [``AlphaEdit``](https://github.com/jianghoucheng/AlphaEdit.git).
