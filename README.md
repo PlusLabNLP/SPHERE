@@ -86,7 +86,7 @@ If you use this code and dataset, please cite our paper:
 @article{liu2025energy,
   title={Energy-Regularized Sequential Model Editing on Hyperspheres},
   author={Liu, Qingyuan and Gu, Jia-Chen and Yao, Yunzhi and Wang, Hong and Peng, Nanyun},
-  journal={arXiv preprint arXiv:2510.xxxxx},
+  journal={arXiv preprint arXiv:2510.01172},
   year={2025}
 }
 ```
