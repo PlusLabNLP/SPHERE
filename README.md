@@ -1,4 +1,5 @@
 # Energy-Regularized Sequential Model Editing on Hyperspheres
+[![arXiv](https://img.shields.io/badge/arXiv-2510.01172-b31b1b.svg)](https://arxiv.org/abs/2510.01172)
 
 
 ![alt text](resource/sphere_sparse.png)
