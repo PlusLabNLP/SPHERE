@@ -83,7 +83,7 @@ The evaluation results will be stored at the `./Edited_Weight/<alg_name>/<model_
 
 
 ## Citation
-If you use this code and dataset, please cite our paper:
+If you use this code, please cite our paper:
 ```bibtex
 @article{liu2025energy,
   title={Energy-Regularized Sequential Model Editing on Hyperspheres},
