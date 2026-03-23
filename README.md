@@ -10,7 +10,7 @@
   <a href="https://www.qingyuanliu.net/sphere_projectpage/">🌐 Project Page</a> •
   <a href="https://github.com/zjunlp/EasyEdit/tree/main/easyeditor/models/SPHERE" target="_blank">✏️ EasyEdit</a> •
   <a href="https://arxiv.org/abs/2510.01172">📄 Paper</a> •
-  <a href="#">📊 Slides</a> •
+  <a href="https://tianzhaohaha.github.io/uploads/NICE_Slide_Sim.pdf">📊 Slides</a> •
   <a href="#" target="_blank">🎬 Video</a>
 </p>
 </div>
