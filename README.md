@@ -1,120 +1,188 @@
 <div align="center">
-<h1>Energy-Regularized Sequential Model Editing on Hyperspheres</h1>
+
+# 🌐 SPHERE
+
+### Energy-Regularized Sequential Model Editing on Hyperspheres
 
 [![arXiv](https://img.shields.io/badge/arXiv-2510.01172-b31b1b.svg)](https://arxiv.org/abs/2510.01172)
 [![DOI](https://zenodo.org/badge/DOI/10.48550/arXiv.2510.01172.svg)](https://doi.org/10.48550/arXiv.2510.01172)
- 
+[![Venue](https://img.shields.io/badge/ICLR-2026-blue.svg)](https://openreview.net/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 <p align="center">
-  <a href="#requirements">📦 Installation</a> •
-  <a href="#quick-start">🚀 QuickStart</a> •
+  <a href="#-installation">📦 Installation</a> •
+  <a href="#-quick-start">🚀 Quick Start</a> •
   <a href="https://www.qingyuanliu.net/sphere_projectpage/">🌐 Project Page</a> •
   <a href="https://github.com/zjunlp/EasyEdit/tree/main/easyeditor/models/SPHERE" target="_blank">✏️ EasyEdit</a> •
   <a href="https://arxiv.org/abs/2510.01172">📄 Paper</a> •
   <a href="https://tianzhaohaha.github.io/uploads/NICE_Slide_Sim.pdf">📊 Slides</a> •
   <a href="#" target="_blank">🎬 Video</a>
 </p>
+
 </div>
 
+---
+
+<p align="center">
+  <img src="resource/sphere_sparse.png" width="95%" alt="SPHERE Overview"/>
+</p>
+
+<p align="center"><em>
+<b>Figure:</b> (a) A weight matrix is viewed as a set of neurons (red dots) on a hypersphere.
+(b) Current SOTA methods introduce perturbations (blue triangles) that interfere with the principal hyperspherical directions of pre-edit weights.
+(c) SPHERE projects new knowledge onto a sparse space complementary to the principal hyperspherical directions.
+</em></p>
 
 
-![alt text](resource/sphere_sparse.png)
-*Figure: a) A weight matrix is viewed as a set of neurons (red dots) on a hypersphere. (b) Current SOTA methods introduce perturbations (blue triangles) that
-interfere with the principle hyperspherical directions of pre-edit weights. (c) SPHERE projects new knowledge onto a sparse space complementary to the principal hyperspherical directions.*
+
+## 📰 News
+
+- 🔥 **[2026.03]** We release the pre-computed **cov** matrices for quick reproduction. See [Download](#-download).
+- 🔥 **[2026.02]** SPHERE is supported in [EasyEdit](https://github.com/zjunlp/EasyEdit/tree/main/easyeditor/models/SPHERE).
+- 🎉 **[2026.01]** SPHERE is accepted by **ICLR 2026** (Score: 8884, Top-1.1% in Transfer/Meta/Lifelong Learning track).
+- 🚀 **[2025.09]** SPHERE is released.
 
 
-## NEWS
-- 🔥 [2026.3.31] We release the pre-computed **cov** matrices for quick reproduction. See [Download](#download).
-- 🔥 [2026.2.9] SPHERE is supported in [EasyEdit](https://github.com/zjunlp/EasyEdit/tree/main/easyeditor/models/SPHERE).
-- 🔥 [2026.1.27] SPHERE is accepted by ICLR 2026 (Socre: 8884, Top-1.1% in Transfer/Meta/Lifelong Learning track).
-- 🔥 [2025.9.29] SPHERE is released.
+## 📦 Installation
 
-## Requirements
-- pytorch==1.12.1
-- einops==0.4.0
-- higher==0.2.1
-- hydra-core==1.2.0
-- transformers==4.30.1
-- datasets==1.18.3
-- matplotlib==3.6.1
-- spacy==3.4.1
-- scipy==1.9.2
-- scikit-learn==1.0.2
-- nltk==3.7
-
-## Download
-We provide the pre-computed **cov** matrix for both Llama3-8B-Instruct and Qwen2.5-7B-Instruct via [Google Drive](https://drive.google.com/drive/folders/17Ea1yxQcnfdhQUR43EWhfJImGxmX4QJh?usp=sharing). After downloading, please decompress the file and place it under the `./data/stats` directory.
-
-
-## Quick Start
-### An example for editing Qwen2.5 (7B) on counterfact dataset using SPHERE
-#### 1. Edit Qwen2.5 (7B) model 
- 
-    python3 -m experiments.evaluate     --alg_name=AlphaEdit     --model_name=./Qwen2.5-7B-Instruct     --hparams_fname=Qwen2.5-7B.json --ds_name=mcf --dataset_size_limit=5000    --num_edits=100 --beta_hse=0.5 --alpha=0.5
-
-This command runs an evaluation script for the SPHERE algorithm using the Qwen2.5-7B-Instruct. Below are the explanations for each argument:
-
-- `--alg_name=AlphaEdit`: Specifies the name of the algorithm being used, which is AlphaEdit in this case.
-- `--model_name=./Qwen2.5-7B-Instruct`: Indicates the name of the model being evaluated, here it is Qwen2.5-7B-Instruct.
-- `--hparams_fname=Qwen2.5-7B.json`: Points to the JSON file containing hyperparameters specific to the Qwen2.5-7B-Instruct model.
-- `--ds_name=mcf`: Specifies the dataset name, in this case, "mcf".
-- `--dataset_size_limit=5000`: Sets the total number of editing samples to 5000.
-- `--num_edits=100`: Defines the batch size for each round of editing, meaning 100 edits will be performed in each batch. 
-- `--beta_hse=0.5`: Cumulative Ratio, meaning that only the top 50% of the principal directions of the edited weights are suppressed.
-- `--alpha=0.5`: Suppression Strength, define the suppression strength in the projection, which controls the extent to which perturbation components along the principal directions are removed.
-
-If you want to run the baseline, please set beta_hse to 0.
-If you want to use SPHERE on MEMIT/PRUNE/RECT, please set beta_hse=0.5, alpha=0.8 to reproduce the paper result.
-
-The edited weight (selected) from each run are stored at `./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/` in a specific format:
 ```bash
-.Edited_Weight/
-    |__ <alg_name>/
-        |__ <model_name>/
-            |__ <dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>
-            |__ <dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>
-            |__ ...
-            |__ <dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>
+pip install torch==1.12.1
+pip install einops==0.4.0 higher==0.2.1 hydra-core==1.2.0
+pip install transformers==4.30.1 datasets==1.18.3
+pip install matplotlib==3.6.1 spacy==3.4.1
+pip install scipy==1.9.2 scikit-learn==1.0.2 nltk==3.7
 ```
 
-#### 2. Editing Evaluation
- 
-    python3 -m scripts.evaluate_each_epoch    --model_name=./Qwen2.5-7B-Instruct     --weight_folder=./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/ --ds_name=mcf --dataset_size_limit=5000  --generation_test_interval=100
+<details>
+<summary>📋 Full dependency list</summary>
 
-This command runs an evaluation script for the SPHERE algorithm using the Qwen2.5-7B-Instruct. Below are the explanations for each argument:
+| Package | Version |
+|:---|:---|
+| pytorch | 1.12.1 |
+| einops | 0.4.0 |
+| higher | 0.2.1 |
+| hydra-core | 1.2.0 |
+| transformers | 4.30.1 |
+| datasets | 1.18.3 |
+| matplotlib | 3.6.1 |
+| spacy | 3.4.1 |
+| scipy | 1.9.2 |
+| scikit-learn | 1.0.2 |
+| nltk | 3.7 |
 
-- `--model_name=./Qwen2.5-7B-Instruct`: Indicates the name of the model being evaluated, here it is Qwen2.5-7B-Instruct.
-- `--weight_folder`: Points to the saved weight from previous editing.
-- `--ds_name=mcf`: Specifies the dataset name, in this case, "mcf".
-- `--dataset_size_limit=5000`: Sets the total number of evaluation samples to (first) 5000.
-- `--generation_test_interval=100`: indicates that a test generation is conducted after every 100 rounds of evaluation.
-
-The evaluation results will be stored at the `./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/summary/summary.json`
-
-#### 2. Downstream Tasks Evaluation
- 
-    python3 -m scripts.evaluate_each_epoch    --model_name=./Qwen2.5-7B-Instruct     --weight_folder=./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/
-
-This command runs an evaluation script for the SPHERE algorithm using the Qwen2.5-7B-Instruct. Below are the explanations for each argument:
-
-- `--model_name=./Qwen2.5-7B-Instruct`: Indicates the name of the model being evaluated, here it is Qwen2.5-7B-Instruct.
-- `--weight_folder`: Points to the saved weight from previous editing.
-
-The evaluation results will be stored at the `./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/rect_eval/`
+</details>
 
 
-## Citation
-If you use this code, please cite our paper:
+## 📥 Download
+
+We provide the pre-computed **cov** matrix for both **Llama3-8B-Instruct** and **Qwen2.5-7B-Instruct** via [Google Drive](https://drive.google.com/drive/folders/17Ea1yxQcnfdhQUR43EWhfJImGxmX4QJh?usp=sharing).
+
+After downloading, decompress the file and place it under the `./data/stats` directory.
+
+
+## 🚀 Quick Start
+
+> **Example:** Editing Qwen2.5 (7B) on the CounterFact dataset using SPHERE
+
+### Step 1: Edit the Model
+
+```bash
+python3 -m experiments.evaluate \
+    --alg_name=AlphaEdit \
+    --model_name=./Qwen2.5-7B-Instruct \
+    --hparams_fname=Qwen2.5-7B.json \
+    --ds_name=mcf \
+    --dataset_size_limit=5000 \
+    --num_edits=100 \
+    --beta_hse=0.5 \
+    --alpha=0.5
+```
+
+<details>
+<summary>🔧 <b>Argument details</b></summary>
+
+| Argument | Description |
+|:---|:---|
+| `--alg_name` | Algorithm name (e.g., `AlphaEdit`) |
+| `--model_name` | Path to the model (e.g., `./Qwen2.5-7B-Instruct`) |
+| `--hparams_fname` | Hyperparameter JSON file (e.g., `Qwen2.5-7B.json`) |
+| `--ds_name` | Dataset name (e.g., `mcf`) |
+| `--dataset_size_limit` | Total number of editing samples |
+| `--num_edits` | Batch size for each round of editing |
+| `--beta_hse` | **Cumulative Ratio** — top percentage of principal directions to suppress (e.g., `0.5` = top 50%) |
+| `--alpha` | **Suppression Strength** — controls extent of perturbation removal along principal directions |
+
+</details>
+
+> [!TIP]
+> - To run the **baseline**, set `beta_hse=0`.
+> - To use SPHERE on **MEMIT / PRUNE / RECT**, set `beta_hse=0.5, alpha=0.8` to reproduce paper results.
+
+The edited weights from each run are stored as:
+
+```
+📂 Edited_Weight/
+└── 📂 <alg_name>/
+    └── 📂 <model_name>/
+        ├── 📁 <dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/
+        ├── 📁 <dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/
+        └── ...
+```
+
+### Step 2: Editing Evaluation
+
+```bash
+python3 -m scripts.evaluate_each_epoch \
+    --model_name=./Qwen2.5-7B-Instruct \
+    --weight_folder=./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/ \
+    --ds_name=mcf \
+    --dataset_size_limit=5000 \
+    --generation_test_interval=100
+```
+
+<details>
+<summary>🔧 <b>Argument details</b></summary>
+
+| Argument | Description |
+|:---|:---|
+| `--model_name` | Path to the model being evaluated |
+| `--weight_folder` | Path to saved weights from previous editing |
+| `--ds_name` | Dataset name (e.g., `mcf`) |
+| `--dataset_size_limit` | Total number of evaluation samples |
+| `--generation_test_interval` | Run test generation every N evaluation rounds |
+
+</details>
+
+📊 Results are saved to:
+`./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<...>/summary/summary.json`
+
+### Step 3: Downstream Tasks Evaluation
+
+```bash
+python3 -m scripts.evaluate_each_epoch \
+    --model_name=./Qwen2.5-7B-Instruct \
+    --weight_folder=./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<batch_size>_<beta_hse>_<alpha>/
+```
+
+📊 Results are saved to:
+`./Edited_Weight/<alg_name>/<model_name>/<dataset>_weight_data_batch_<...>/rect_eval/`
+
+
+## 📝 Citation
+
+If you find this work useful, please cite our paper:
+
 ```bibtex
 @inproceedings{liu2026energy,
-  title={Energy-Regularized Sequential Model Editing on Hyperspheres},
-  author={Liu, Qingyuan and Gu, Jia-Chen and Yao, Yunzhi and Wang, Hong and Peng, Nanyun},
-  booktitle={The Fourteenth International Conference on Learning Representations},
-  year={2026}
+  title     = {Energy-Regularized Sequential Model Editing on Hyperspheres},
+  author    = {Liu, Qingyuan and Gu, Jia-Chen and Yao, Yunzhi and Wang, Hong and Peng, Nanyun},
+  booktitle = {The Fourteenth International Conference on Learning Representations},
+  year      = {2026}
 }
 ```
 
 
+## 🙏 Acknowledgment & Contact
 
-## Acknowledgment
-Our code is based on  [``MEMIT``](https://github.com/kmeng01/memit.git), [``EMMET``](https://github.com/scalable-model-editing/unified-model-editing.git) and [``AlphaEdit``](https://github.com/jianghoucheng/AlphaEdit.git).
-If you have any questions, please feel free to leave a message at ql2505(at)columbia.edu!
+Our code is built upon [**MEMIT**](https://github.com/kmeng01/memit.git), [**EMMET**](https://github.com/scalable-model-editing/unified-model-editing.git), and [**AlphaEdit**](https://github.com/jianghoucheng/AlphaEdit.git). If you have any questions, feel free to reach out at **ql2505(at)columbia.edu**.
