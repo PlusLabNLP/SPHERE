@@ -2,13 +2,11 @@
 
 # 🌐 SPHERE
 
-### Energy-Regularized Sequential Model Editing on Hyperspheres
+### ICLR 2026: Energy-Regularized Sequential Model Editing on Hyperspheres
 
 [![arXiv](https://img.shields.io/badge/arXiv-2510.01172-b31b1b.svg)](https://arxiv.org/abs/2510.01172)
 [![DOI](https://zenodo.org/badge/DOI/10.48550/arXiv.2510.01172.svg)](https://doi.org/10.48550/arXiv.2510.01172)
-[![Venue](https://img.shields.io/badge/ICLR-2026-blue.svg)](https://openreview.net/)
-[![Python](https://img.shields.io/badge/Python-3.8+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Venue](https://img.shields.io/badge/ICLR-2026-blue.svg)](https://iclr.cc/virtual/2026/poster/10010872)
 
 <p align="center">
   <a href="#-installation">📦 Installation</a> •
