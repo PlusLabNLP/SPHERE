@@ -23,6 +23,7 @@ interfere with the principle hyperspherical directions of pre-edit weights. (c) 
 
 
 ## NEWS
+- 🔥 [2026.3.31] We release the pre-computed **cov** matrices for quick reproduction. See [Download](#download).
 - 🔥 [2026.2.9] SPHERE is supported in [EasyEdit](https://github.com/zjunlp/EasyEdit/tree/main/easyeditor/models/SPHERE).
 - 🔥 [2026.1.27] SPHERE is accepted by ICLR 2026 (Socre: 8884, Top-1.1% in Transfer/Meta/Lifelong Learning track).
 - 🔥 [2025.9.29] SPHERE is released.
@@ -39,6 +40,9 @@ interfere with the principle hyperspherical directions of pre-edit weights. (c) 
 - scipy==1.9.2
 - scikit-learn==1.0.2
 - nltk==3.7
+
+## Download
+We provide the pre-computed **cov** matrix for both Llama3-8B-Instruct and Qwen2.5-7B-Instruct via [Google Drive](https://drive.google.com/drive/folders/17Ea1yxQcnfdhQUR43EWhfJImGxmX4QJh?usp=sharing). After downloading, please decompress the file and place it under the `./data/stats` directory.
 
 
 ## Quick Start
@@ -104,7 +108,7 @@ If you use this code, please cite our paper:
 @inproceedings{liu2026energy,
   title={Energy-Regularized Sequential Model Editing on Hyperspheres},
   author={Liu, Qingyuan and Gu, Jia-Chen and Yao, Yunzhi and Wang, Hong and Peng, Nanyun},
-  booktitle={The Fourteenth International Conference on Learning Representations}
+  booktitle={The Fourteenth International Conference on Learning Representations},
   year={2026}
 }
 ```
