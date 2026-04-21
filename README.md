@@ -1,5 +1,7 @@
 <div align="center">
 
+If this project helps you, a star ⭐ would mean a lot to us. 😊
+
 # 🌐 SPHERE
 
 ### ICLR 2026: Energy-Regularized Sequential Model Editing on Hyperspheres
