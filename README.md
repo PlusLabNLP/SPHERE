@@ -3,7 +3,9 @@
 
 # 🌐 SPHERE
 
-### ICLR 2026: Energy-Regularized Sequential Model Editing on Hyperspheres
+## ICLR 2026: Energy-Regularized Sequential Model Editing on Hyperspheres
+<h3><em>Still one line of code. Boom your editing performance!</em></h3>
+
 <p><em>If this project helps you, a star ⭐ would mean a lot to us. </em>😊😊</p>
 
 [![arXiv](https://img.shields.io/badge/arXiv-2510.01172-b31b1b.svg)](https://arxiv.org/abs/2510.01172)
